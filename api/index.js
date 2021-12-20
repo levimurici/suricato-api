@@ -32,7 +32,7 @@ const routerPostSuricatoTemp = require('./routes/mcu/garden/dump/suricato-temp')
 app.use('/mcu/garden/dump/suricato-temp', routerPostSuricatoTemp.routerPost)
 
 const routerDataGardenUpdate = require('./routes/mcu/garden/data/dataGarden')
-app.use('/mcu/alarm/data-garden-updated', routerDataGardenUpdate.routerGet)
+app.use('/mcu/garden/data-garden-updated', routerDataGardenUpdate.routerGet)
 
 /* ---------------- Rotas Security Mode  ---------------- */
 const routerPostSecurityMode = require('./routes/watchdog/security-mode/dump')
