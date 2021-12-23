@@ -16,7 +16,7 @@ var mqqtStatus = {
 };
 
 routerGet.get('/', jsonParser, (req, res) => {
-const client = mqtt.connect("mqtt://192.168.1.16");
+const client = mqtt.connect("http://mqtt:1883");
 client.on("connect",function(){	
     if (client.connected == true){
         mqqtStatus["status"] = client.connected
