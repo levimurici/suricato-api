@@ -17,7 +17,7 @@ var dataSuricatoTemp = {
 }
 
 routerPost.post('/', jsonParser, (req, res) => {
-    const dataIncoming = req.body.suricatoTemp.data
+    const dataIncoming = req.body.suricato_temp.suricato
     let dataDevice = dataIncoming.device;
     console.log(dataDevice)
     if(dataDevice == dataSuricatoTemp['suricatoTemp']['data']['device']){

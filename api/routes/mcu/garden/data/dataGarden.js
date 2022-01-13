@@ -17,7 +17,7 @@ var dataGarden = {
 
         "suricatoTemp": 
         {
-            "device": "device/Temp",
+            "device": "device4/temperature",
             "humidity": "89%",
             "temperature": "29C"
         },
@@ -34,10 +34,10 @@ routerGet.get('/', jsonParser, (req, res) => {
     /* dataGarden.suricatoEnv["temperature"] = dataSuricatoEnv.data.temperature
     dataGarden.suricatoEnv["altitude"] = dataSuricatoEnv.data.altitude
 
-    dataGarden.suricatoSoil["soil"] = dataSuricatoSoil.data.temperature
+    dataGarden.suricatoSoil["soil"] = dataSuricatoSoil.data.temperature */
 
     dataGarden.suricatoTemp["temperature"] = dataSuricatoTemp.data.temperature
-    dataGarden.suricatoTemp["humidity"] = dataSuricatoTemp.data.altitude */
+    dataGarden.suricatoTemp["humidity"] = dataSuricatoTemp.data.humidity
 
     res.status(200).send(dataGarden)
 });
