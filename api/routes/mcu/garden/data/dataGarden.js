@@ -37,8 +37,8 @@ routerGet.get('/', jsonParser, (req, res) => {
 
     dataGarden.suricatoSoil["soil"] = dataSuricatoSoil.data.temperature */
 
-    dataGarden.suricatoTemp["temperature"] = dataSuricatoTemp.suricatoTemp.data.temperature
-    dataGarden.suricatoTemp["humidity"] = dataSuricatoTemp.suricatoTemp.data.humidity
+    dataGarden.garden.suricatoTemp["temperature"] = dataSuricatoTemp.suricatoTemp.data.temperature
+    dataGarden.garden.suricatoTemp["humidity"] = dataSuricatoTemp.suricatoTemp.data.humidity
 
     res.status(200).send(dataGarden)
 });
