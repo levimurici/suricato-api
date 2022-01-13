@@ -3,13 +3,15 @@ const jsonParser = bodyParser.json()
 
 const routerPost = require('express').Router()
 
+var humidity, temperature;
+
 var dataSuricatoTemp = {
     "suricatoTemp" : {
         "data": 
         {
-            "device": "device/Temp",
-            "humidity": "89%",
-            "temperature": "29C"
+            "device": "device4/temperature",
+            "humidity": humidity,
+            "temperature": temperature
         }
     }
 }
