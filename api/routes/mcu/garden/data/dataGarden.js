@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json()
 
 const routerGet = require('express').Router()
+var temperature, humidity;
 
 var dataGarden = {
     "garden" : {
@@ -18,8 +19,8 @@ var dataGarden = {
         "suricatoTemp": 
         {
             "device": "device4/temperature",
-            "humidity": "89%",
-            "temperature": "29C"
+            "humidity": humidity,
+            "temperature": temperature
         },
 
         "suricatoSoil": 
@@ -36,8 +37,8 @@ routerGet.get('/', jsonParser, (req, res) => {
 
     dataGarden.suricatoSoil["soil"] = dataSuricatoSoil.data.temperature */
 
-    dataGarden.suricatoTemp["temperature"] = dataSuricatoTemp.data.temperature
-    dataGarden.suricatoTemp["humidity"] = dataSuricatoTemp.data.humidity
+    dataGarden.suricatoTemp["temperature"] = dataSuricatoTemp.suricatoTemp.data.temperature
+    dataGarden.suricatoTemp["humidity"] = dataSuricatoTemp.suricatoTemp.data.humidity
 
     res.status(200).send(dataGarden)
 });
