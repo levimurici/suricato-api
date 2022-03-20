@@ -8,7 +8,7 @@ COPY ./api/package*.json ./
 
 RUN npm install
 
-COPY ./api/* .
+COPY ./api/* ./
 
 COPY --chown=node:node . .
 
