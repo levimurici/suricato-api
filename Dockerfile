@@ -16,4 +16,4 @@ USER node
 
 EXPOSE 3000
 
-CMD [ "node", "api/index.js" ]
+CMD [ "node", "api/app.js" ]
