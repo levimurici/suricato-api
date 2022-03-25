@@ -37,16 +37,13 @@ const routerGetGardenData = require('./mcu/garden/show')
 app.use('/garden/show', routerGetGardenData)
 
 /* ---------------- Rotas Security Mode  ---------------- */
-const routerPostSecurityMode = require('./watchdog/security-mode')
+const routerPostSecurityMode = require('./watchdog/security-mode/mode')
 app.use('/watchdog/dump', routerPostSecurityMode.routerPost)
 
-const routerGetSecurityMode = require('./watchdog/security-mode')
+const routerGetSecurityMode = require('./watchdog/security-mode/mode')
 app.use('/watchdog', routerGetSecurityMode.routerGet)
 
-// /* ---------------- Rotas dos watchdogs  ---------------- */
-
-// /* Rotas dos watchdogs */
-// const routerGetMqtt = require('./routes/watchdog/mqtt')
-// app.use('/watchdog/mqtt', routerGetMqtt.routerGet)
+const routerGetSecurityLoop = require('./watchdog/security-mode/mode')
+app.use('/watchdog/loop', routerGetSecurityLoop.routerGet)
 
 module.exports = app;

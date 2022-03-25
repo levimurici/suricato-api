@@ -66,10 +66,8 @@ module.exports = {
 /*
 EXAMPLE:
 {
-    "securityStatus" : {
-        "data": 
-        {
-            "status": "status"
-        }
+    "name": "securityMode",
+    "data": {
+        "status": "OFF"
     }
 }*/
