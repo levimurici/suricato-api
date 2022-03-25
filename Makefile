@@ -3,10 +3,11 @@
 
 DOCKER=$(shell which docker)
 REPOSITORY?=dendebaiano/suricato-api
-VERSION?=2.5
+VERSION?=1.2
+SCRIPT=make.sh
 
 image: ## build the docker image from Dockerfile
-	$(DOCKER) build --no-cache -t ${REPOSITORY}:${VERSION} \
+	sh ${SCRIPT} && $(DOCKER) build --no-cache -t ${REPOSITORY}:${VERSION} \
         --build-arg VERSION=${VERSION} \
         --build-arg VCS_REF=`git rev-parse --short HEAD` \
         --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` .

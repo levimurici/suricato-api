@@ -1,2 +1,6 @@
 ./api/node_modules
 ./api/.env
+./api/secrets/*
+./*/.env
+make.sh
+variables.env

@@ -20,7 +20,7 @@ module.exports = config
 //     },
 
 //     "mongodb": {
-//         "url": "mongodb://192.168.1.12:27017",
+//         "url": "mongodb://192.168.1.8:27017",
 //         "dbName":"local",
 //         "usuario": "root",
 //         "senha": "suricato",
