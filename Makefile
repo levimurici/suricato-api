@@ -3,7 +3,7 @@
 
 DOCKER=$(shell which docker)
 REPOSITORY?=dendebaiano/suricato-api
-VERSION?=1.3
+VERSION?=1.3.1
 SCRIPT=make.sh
 
 image: ## build the docker image from Dockerfile

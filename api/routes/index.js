@@ -30,9 +30,11 @@ app.use('/alarm/getAllData/type', routerGetAllType)
 const routerGetAllPlace = require('./mcu/allData/place')
 app.use('/alarm/getAllData/place', routerGetAllPlace)
 
+//alarm/show/<suricatoName>
 const routerGetAlarmData = require('./mcu/alarm/show')
 app.use('/alarm/show', routerGetAlarmData)
 
+//garden/show/<suricatoName>
 const routerGetGardenData = require('./mcu/garden/show')
 app.use('/garden/show', routerGetGardenData)
 
