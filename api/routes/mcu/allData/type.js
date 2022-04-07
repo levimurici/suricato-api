@@ -16,6 +16,7 @@ var filter = {};
 
 async function connect_to_find_data (){
     await client.connect();
+    setTimeout(function(){}, 500)
     const filteredDocs = await collection.find({ "info.type": filter }).toArray();
     suricatoObject = filteredDocs;
     client.close();
@@ -24,7 +25,7 @@ async function connect_to_find_data (){
 routerGet.get('/:info', jsonParser, (req, res) => {
     filter = req.params.info;
     console.log("Get all request ->",filter)
-    connect_to_find_data()
+    connect_to_find_data().catch(error => { throw error})
     setTimeout(() => res.status(200).send(suricatoObject), 500)
 });
 

@@ -23,9 +23,8 @@ async function connect_to_find_data (){
 
 routerGet.get('/:info', jsonParser, (req, res) => {
     filter = req.params.info;
-    console.log(filter)
     console.log("Get all request ->",filter)
-    connect_to_find_data()
+    connect_to_find_data().catch(error => { throw error})
     setTimeout(() => res.status(200).send(suricatoObject), 500)
 });
 

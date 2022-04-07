@@ -24,6 +24,7 @@ const routerUpdateSuricatoGarden = require('./mcu/garden/dump')
 app.use('/garden/update', routerUpdateSuricatoGarden.routerPost)
 
 /* ---------------- Read ---------------- */
+//alarm/getAllData/<Alarm | Garden>
 const routerGetAllType = require('./mcu/allData/type')
 app.use('/alarm/getAllData/type', routerGetAllType)
 
@@ -42,6 +43,7 @@ app.use('/garden/show', routerGetGardenData)
 const routerPostSecurityMode = require('./watchdog/security-mode/mode')
 app.use('/watchdog/dump', routerPostSecurityMode.routerPost)
 
+//watchdog/<security_check | securityMode | securityLoop>
 const routerGetSecurityMode = require('./watchdog/security-mode/mode')
 app.use('/watchdog', routerGetSecurityMode.routerGet)
 
