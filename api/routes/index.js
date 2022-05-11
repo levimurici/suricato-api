@@ -23,6 +23,9 @@ app.use('/alarm/update', routerUpdateSuricatoAlarm.routerPost)
 const routerUpdateSuricatoGarden = require('./mcu/garden/dump')
 app.use('/garden/update', routerUpdateSuricatoGarden.routerPost)
 
+const routerUpdateSuricatoMotion = require('./mcu/motion/dump')
+app.use('/motion/update', routerUpdateSuricatoMotion.routerPost)
+
 /* ---------------- Read ---------------- */
 //alarm/getAllData/<Alarm | Garden>
 const routerGetAllType = require('./mcu/allData/type')
@@ -38,6 +41,10 @@ app.use('/alarm/show', routerGetAlarmData)
 //garden/show/<suricatoName>
 const routerGetGardenData = require('./mcu/garden/show')
 app.use('/garden/show', routerGetGardenData)
+
+//motion/show/<suricatoName>
+const routerGetMotionData = require('./mcu/motion/show')
+app.use('/motion/show', routerGetMotionData)
 
 /* ---------------- Rotas Security Mode  ---------------- */
 const routerPostSecurityMode = require('./watchdog/security-mode/mode')
