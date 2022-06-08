@@ -13,15 +13,15 @@ elif ["$CIRCLE_BRANCH" == "main" ]; then
   git tag $TAG
   docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-  echo "building image $IMAGE:$TAG" | tee $BUILD_REPORT_PATH
-  docker build -t $IMAGE:$TAG . | tee $BUILD_REPORT_PATH
+  echo "building image $IMAGE:$TAG" #| tee $BUILD_REPORT_PATH
+  docker build -t $IMAGE:$TAG . #| tee $BUILD_REPORT_PATH
 
-  echo "pushing image $IMAGE:$TAG" | tee $BUILD_REPORT_PATH
-  docker push $IMAGE:$TAG | tee -a $BUILD_REPORT_PATH
+  echo "pushing image $IMAGE:$TAG" #| tee $BUILD_REPORT_PATH
+  docker push $IMAGE:$TAG #| tee -a $BUILD_REPORT_PATH
 
   echo "Image $IMAGE:$TAG published on docker hub!"
   
-  git push origin $TAG | tee -a $BUILD_REPORT_PATH
+  git push origin $TAG #| tee -a $BUILD_REPORT_PATH
   echo "$IMAGE:$TAG created on github!"
 else
   echo "The version $TAG is unformated!"
