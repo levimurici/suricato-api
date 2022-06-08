@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Building and Publishing Image
           command: |
-            cd ~/
+            cd ~/suricato-api
             bash ~/suricato-api/scripts/publish-docker-image.sh
 
   deploy-env:
