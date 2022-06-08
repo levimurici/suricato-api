@@ -1,0 +1,26 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/iot/suricato/suricato-api/api
+    docker:
+      - image: "dendebaiano/suricato-api:1.3.9"
+    steps:
+      - checkout
+      - run: node app.js
+  test:
+    working_directory: ~/iot/suricato/suricato-api/api
+    docker:
+      - image: "dendebaiano/suricato-api:1.3.9"
+    steps:
+      - checkout
+      - run: npm install
+      - run: node app.js
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
