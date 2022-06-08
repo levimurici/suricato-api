@@ -18,13 +18,7 @@ jobs:
 
       - setup_remote_docker:
           version: 20.10.14
-
-      - run:
-          name: Checking env variables
-          command: |
-            echo $CIRCLE_BRANCH
-            echo $CIRCLE_PROJECT_REPONAME
-
+          
       - run:
           name: Getting Deploy Toolkit
           command: |
