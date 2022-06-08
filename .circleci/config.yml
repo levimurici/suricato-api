@@ -5,9 +5,6 @@ defaults: &defaults
       auth:
         username: $DOCKER_USER
         password: $DOCKER_PASSWORD
-      environment:
-        TEST_REPORT_PATH: reports/npm-test.txt
-        OUTDATED_REPORT_PATH: reports/npm-outdated.txt
 
 version: 2
 jobs:
@@ -35,28 +32,21 @@ jobs:
             cd suricato-api/api
             npm install
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-{{ checksum "package.json" }}
 
-      - run:
-          name: Executing Tests
-          command: |
-            mkdir reports
-            npm test
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
-      - store_test_results:
-          path: ./reports/junit/
-      - store_artifacts:
-          path: ./reports/junit
-
-      - run:
-          name: Executing NPM Outdated
-          command: |
-            npm outdated > ${OUTDATED_REPORT_PATH}
-      - store_artifacts:
-          path: reports
+      # - run:
+      #     name: Executing Tests
+      #     command: |
+      #       cd ~/reports
+      #       npm test
+      #     environment:
+      #       JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      # - store_test_results:
+      #     path: ./reports/junit/
+      # - store_artifacts:
+      #     path: ./reports/junit
 
       - run:
           name: Building and Publishing Image
