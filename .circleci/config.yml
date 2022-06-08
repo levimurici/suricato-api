@@ -20,6 +20,14 @@ jobs:
           version: 20.10.14
 
       - run:
+        name: Making report pathes
+        command: |
+          cd ~/
+          mkdir reports
+          cd reports
+          touch npm-test.txt && touch npm-outdated.txt
+
+      - run:
           name: Getting Deploy Toolkit
           command: |
             cd ~/
@@ -30,16 +38,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-
-      - run:
-          name: Installing NPM Modules
-          command: |
-            npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: Executing Tests
