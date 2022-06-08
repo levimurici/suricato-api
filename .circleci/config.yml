@@ -20,12 +20,12 @@ jobs:
           version: 20.10.14
 
       - run:
-        name: Making report pathes
-        command: |
-          cd ~/
-          mkdir reports
-          cd reports
-          touch npm-test.txt && touch npm-outdated.txt
+          name: Making report pathes
+          command: |
+            cd ~/
+            mkdir reports
+            cd reports
+            touch npm-test.txt && touch npm-outdated.txt
 
       - run:
           name: Getting Deploy Toolkit
