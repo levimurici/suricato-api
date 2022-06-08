@@ -1,26 +1,114 @@
-version: 2.1
+defaults: &defaults
+  working_directory: ~/build
+  docker:
+    - image: cimg/node:14.17.5
+      auth:
+        username: $DOCKER_USER
+        password: $DOCKER_PASSWORD
+      environment:
+        TEST_REPORT_PATH: reports/npm-test.txt
+        OUTDATED_REPORT_PATH: reports/npm-outdated.txt
 
+version: 2
 jobs:
   build:
-    working_directory: ~/iot/suricato/suricato-api/api
-    docker:
-      - image: "dendebaiano/suricato-api:1.3.9"
+    <<: *defaults
     steps:
       - checkout
-      - run: node app.js
-  test:
-    working_directory: ~/iot/suricato/suricato-api/api
-    docker:
-      - image: "dendebaiano/suricato-api:1.3.9"
+
+      - setup_remote_docker:
+          version: 14.17.5
+
+      - run:
+          name: Getting Deploy Toolkit
+          command: |
+            cd /
+            git clone https://github.com/levimurici/suricato-api
+            cd suricato-api
+            npm install
+            cd ~/build
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Installing NPM Modules
+          command: |
+            npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Executing Tests
+          command: |
+            mkdir reports
+            npm test
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - store_test_results:
+          path: ./reports/junit/
+      - store_artifacts:
+          path: ./reports/junit
+
+      - run:
+          name: Executing NPM Outdated
+          command: |
+            npm outdated > ${OUTDATED_REPORT_PATH}
+      - store_artifacts:
+          path: reports
+
+      - run:
+          name: Building and Publishing Image
+          command: |
+            bash /suricato-api/scripts/publish-docker-image.sh
+
+  deploy-env:
+    <<: *defaults
+    environment:
+      SWARM_ENV: dev
+
     steps:
       - checkout
-      - run: npm install
-      - run: node app.js
+
+      # - setup_remote_docker:
+      #     version: 14.17.5
+
+      # - run:
+      #     name: Getting Deploy Toolkit
+      #     command: |
+      #       cd /
+      #       git clone https://github.com/levimurici/suricato-api
+      #       cd suricato-api
+      #       npm install
+      #       cd ~/build
+
+      # - run:
+      #     name: Deploying Image in Suricato-Env
+      #     command: |
+      #       export SWARM_DEPLOY_CA=$SWARM_DEV_CA
+      #       export SWARM_DEPLOY_CERT=$SWARM_DEV_CERT
+      #       export SWARM_DEPLOY_KEY=$SWARM_DEV_KEY
+      #       export SWARM_DEPLOY_HOST=$SWARM_DEV
+      #       bash /suricato-api/scripts/swarm-deploy.sh
 
 workflows:
-  build_and_test:
+  version: 2
+  automated-deploy-process:
     jobs:
-      - build
-      - test:
+      - build:
+          context: DOCKER
+      - waiting-dev-approval:
+          type: approval
           requires:
             - build
+      - deploy-env:
+          context: DOCKER
+          filters:
+            branches:
+              only: master
+          requires:
+            - waiting-dev-approval
