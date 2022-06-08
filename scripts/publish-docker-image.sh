@@ -21,8 +21,9 @@ elif [ "$CIRCLE_BRANCH" == "main" ]; then
 
   echo "Image $IMAGE:$TAG published on docker hub!"
   
-  git push origin $TAG #| tee -a $BUILD_REPORT_PATH
-  echo "$IMAGE:$TAG created on github!"
+# git push origin $TAG #| tee -a $BUILD_REPORT_PATH
+# echo "$IMAGE:$TAG created on github!"
+
 else
   echo "The version $TAG is unformated!"
   echo "Use MAJOR.MINOR.PATCH in main"
