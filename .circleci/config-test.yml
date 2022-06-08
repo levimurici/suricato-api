@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/build
   docker:
-    - image: cimg/node:14.17.5
+    - image: cimg/node:17.2.0
       auth:
         username: $DOCKER_USER
         password: $DOCKER_PASSWORD
@@ -17,16 +17,15 @@ jobs:
       - checkout
 
       - setup_remote_docker:
-          version: 14.17.5
+          version: 20.10.14
 
       - run:
           name: Getting Deploy Toolkit
           command: |
-            cd /
+            cd ~/
             git clone https://github.com/levimurici/suricato-api
-            cd suricato-api
+            cd suricato-api/api
             npm install
-            cd ~/build
 
       - restore_cache:
           keys:
@@ -64,7 +63,7 @@ jobs:
       - run:
           name: Building and Publishing Image
           command: |
-            bash /suricato-api/scripts/publish-docker-image.sh
+            bash ~/suricato-api/scripts/publish-docker-image.sh
 
   deploy-env:
     <<: *defaults
@@ -80,9 +79,9 @@ jobs:
       # - run:
       #     name: Getting Deploy Toolkit
       #     command: |
-      #       cd /
+      #       cd /~
       #       git clone https://github.com/levimurici/suricato-api
-      #       cd suricato-api
+      #       cd suricato-api/api
       #       npm install
       #       cd ~/build
 
@@ -93,7 +92,7 @@ jobs:
       #       export SWARM_DEPLOY_CERT=$SWARM_DEV_CERT
       #       export SWARM_DEPLOY_KEY=$SWARM_DEV_KEY
       #       export SWARM_DEPLOY_HOST=$SWARM_DEV
-      #       bash /suricato-api/scripts/swarm-deploy.sh
+      #       bash ~/suricato-api/scripts/swarm-deploy.sh
 
 workflows:
   version: 2
