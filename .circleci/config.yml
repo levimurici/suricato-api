@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Building and Publishing Image
           command: |
-            git clone https://$GITHUB_USER:$GIT_TOKEN@github.com/levimurici/dnd-scripts.git
+            git clone https://$GITHUB_USER:$GIT_TOKEN@github.com/levimurici/dnd-scripts
             cd ~/suricato-api
             bash ~/dnd-scripts/scripts/publish-docker-image.sh
 
