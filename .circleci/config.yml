@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/build
   docker:
-    - image: cimg/node:17.2.0
+    - image: cimg/node:20.10.14
       auth:
         username: $DOCKER_USER
         password: $DOCKER_PASSWORD
@@ -17,7 +17,7 @@ jobs:
       - checkout
 
       - setup_remote_docker:
-          version: 17.2.0
+          version: 20.10.14
 
       - run:
           name: Getting Deploy Toolkit
