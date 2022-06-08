@@ -21,6 +21,8 @@ jobs:
           command: |
             echo $CIRCLE_BRANCH
             echo $CIRCLE_PROJECT_REPONAME
+            echo $GIT_TOKEN
+            echo $GITHUB_USER
 
       - run:
           name: Making report pathes
