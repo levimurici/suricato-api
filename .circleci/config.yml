@@ -57,19 +57,17 @@ jobs:
       - run:
           name: Building and Publishing Image
           command: |
+            git clone https://$GITHUB_USER:$GIT_TOKEN@github.com/levimurici/dnd-scripts.git
             cd ~/suricato-api
-            bash ~/suricato-api/scripts/publish-docker-image.sh
+            bash ~/dnd-scripts/scripts/publish-docker-image.sh
 
   deploy-env:
     <<: *defaults
     environment:
-      SWARM_ENV: dev
+      SWARM_ENV: suricato
 
     steps:
       - checkout
-
-      # - setup_remote_docker:
-      #     version: 14.17.5
 
       # - run:
       #     name: Getting Deploy Toolkit
@@ -78,29 +76,29 @@ jobs:
       #       git clone https://github.com/levimurici/suricato-api
       #       cd suricato-api/api
       #       npm install
-      #       cd ~/build
 
       # - run:
       #     name: Deploying Image in Suricato-Env
       #     command: |
-      #       export SWARM_DEPLOY_CA=$SWARM_DEV_CA
-      #       export SWARM_DEPLOY_CERT=$SWARM_DEV_CERT
-      #       export SWARM_DEPLOY_KEY=$SWARM_DEV_KEY
-      #       export SWARM_DEPLOY_HOST=$SWARM_DEV
-      #       bash ~/suricato-api/scripts/swarm-deploy.sh
+      #       export SWARM_DEPLOY_CA=$SWARM_SURICATO_CA
+      #       export SWARM_DEPLOY_CERT=$SWARM_SURICATO_CERT
+      #       export SWARM_DEPLOY_KEY=$SWARM_SURICATO_KEY
+      #       export SWARM_DEPLOY_HOST=$SWARM_SURICATO
+      #       git clone https://$GITHUB_USER:$GIT_TOKEN@github.com/levimurici/dnd-scripts.git
+      #       bash ~/dnd-scripts/scripts/swarm-deploy.sh
 
 workflows:
   version: 2
   automated-deploy-process:
     jobs:
       - build:
-          context: DOCKER
+          context: AUTH
       - waiting-dev-approval:
           type: approval
           requires:
             - build
       - deploy-env:
-          context: DOCKER
+          context: AUTH
           filters:
             branches:
               only: master

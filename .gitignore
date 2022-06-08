@@ -4,3 +4,4 @@
 ./*/.env
 make.sh
 variables.env
+./scripts/*
