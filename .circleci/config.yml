@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Getting Deploy Toolkit
           command: |
-            cd /
+            cd ~/
             git clone https://github.com/levimurici/suricato-api
             cd suricato-api
             npm install
@@ -64,7 +64,7 @@ jobs:
       - run:
           name: Building and Publishing Image
           command: |
-            bash /suricato-api/scripts/publish-docker-image.sh
+            bash ~/suricato-api/scripts/publish-docker-image.sh
 
   deploy-env:
     <<: *defaults
@@ -80,7 +80,7 @@ jobs:
       # - run:
       #     name: Getting Deploy Toolkit
       #     command: |
-      #       cd /
+      #       cd /~
       #       git clone https://github.com/levimurici/suricato-api
       #       cd suricato-api
       #       npm install
@@ -93,7 +93,7 @@ jobs:
       #       export SWARM_DEPLOY_CERT=$SWARM_DEV_CERT
       #       export SWARM_DEPLOY_KEY=$SWARM_DEV_KEY
       #       export SWARM_DEPLOY_HOST=$SWARM_DEV
-      #       bash /suricato-api/scripts/swarm-deploy.sh
+      #       bash ~/suricato-api/scripts/swarm-deploy.sh
 
 workflows:
   version: 2
