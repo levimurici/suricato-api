@@ -24,7 +24,7 @@ jobs:
           command: |
             cd ~/
             git clone https://github.com/levimurici/suricato-api
-            cd suricato-api
+            cd suricato-api/api
             npm install
             cd ~/build
 
@@ -82,7 +82,7 @@ jobs:
       #     command: |
       #       cd /~
       #       git clone https://github.com/levimurici/suricato-api
-      #       cd suricato-api
+      #       cd suricato-api/api
       #       npm install
       #       cd ~/build
 
