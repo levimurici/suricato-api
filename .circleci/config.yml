@@ -17,6 +17,12 @@ jobs:
           version: 20.10.14
 
       - run:
+          name: Checking env variables
+          command: |
+            echo $CIRCLE_BRANCH
+            echo $CIRCLE_PROJECT_REPONAME
+
+      - run:
           name: Making report pathes
           command: |
             cd ~/
