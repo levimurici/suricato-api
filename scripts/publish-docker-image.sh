@@ -9,7 +9,7 @@ IMAGE=$( if [ $DOCKER_IMAGE ]; then echo $DOCKER_IMAGE; else echo "dendebaiano/$
 
 if [ "$TAG" == "$GIT_TAG" ]; then
   echo "The version $TAG already exists!"
-elif [("$CIRCLE_BRANCH" == "master" )]; then
+elif [("$CIRCLE_BRANCH" == "main" )]; then
   git tag $TAG
   docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
@@ -25,5 +25,5 @@ elif [("$CIRCLE_BRANCH" == "master" )]; then
   echo "$IMAGE:$TAG created on github!"
 else
   echo "The version $TAG is unformated!"
-  echo "Use MAJOR.MINOR.PATCH in master"
+  echo "Use MAJOR.MINOR.PATCH in main"
 fi
