@@ -26,7 +26,6 @@ jobs:
             git clone https://github.com/levimurici/suricato-api
             cd suricato-api/api
             npm install
-            cd ~/build
 
       - restore_cache:
           keys:
